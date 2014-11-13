@@ -6,12 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PictureCallback;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -105,6 +107,8 @@ public class CameraActivity extends ActionBarActivity {
 	public void ResultActivity(byte[] data) {
 		mainbitmap = null;
 		mainbitmap = decodeSampledBitmapFromResource(data, 200, 200);
+		mainbitmap=RotateBitmap(mainbitmap,270);
+		mainbitmap=flip(mainbitmap);
 	}
 
 	public static Bitmap decodeSampledBitmapFromResource(byte[] data,
@@ -159,7 +163,6 @@ public class CameraActivity extends ActionBarActivity {
 	}
 
 	@Override
-	
 	protected void onPause() {
 		super.onPause();
 		releaseCamera(); // release the camera immediately on pause event
@@ -169,9 +172,8 @@ public class CameraActivity extends ActionBarActivity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
-		if(mCamera==null)
-		{
+
+		if (mCamera == null) {
 			setContentView(R.layout.activity_camera);
 			captureButton = (Button) findViewById(R.id.button_capture);
 			FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -185,17 +187,39 @@ public class CameraActivity extends ActionBarActivity {
 				e.printStackTrace();
 			}
 
-			// Create our Preview view and set it as the content of our activity.
+			// Create our Preview view and set it as the content of our
+			// activity.
 			mPreview = new CameraPreview(this, mCamera);
 
 			preview.addView(mPreview);
 		}
 	}
-	
+
 	private void releaseCamera() {
 		if (mCamera != null) {
 			mCamera.release(); // release the camera for other applications
 			mCamera = null;
 		}
 	}
+
+	// rotate the bitmap to portrait
+	public static Bitmap RotateBitmap(Bitmap source, float angle) {
+		Matrix matrix = new Matrix();
+		matrix.postRotate(angle);
+		return Bitmap.createBitmap(source, 0, 0, source.getWidth(),
+				source.getHeight(), matrix, true);
+	}
+
+	//the front camera displays the mirror image, we should flip it to its original
+		Bitmap flip(Bitmap d)
+		{
+		    Matrix m = new Matrix();
+		    m.preScale(-1, 1);
+		    Bitmap src = d;
+		    Bitmap dst = Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), m, false);
+		    dst.setDensity(DisplayMetrics.DENSITY_DEFAULT);
+		    return dst;
+		}
+		
+	
 }

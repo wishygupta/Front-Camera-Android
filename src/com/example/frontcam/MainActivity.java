@@ -60,8 +60,8 @@ public class MainActivity extends ActionBarActivity {
 					bitmapFrontCam = (Bitmap) data
 							.getParcelableExtra("BitmapImage");
 					
-					bitmapFrontCam=RotateBitmap(bitmapFrontCam,270);
-					bitmapFrontCam=flip(bitmapFrontCam);
+					
+					
 				} catch (Exception e) {
 				}
 				iv.setImageBitmap(bitmapFrontCam);
@@ -73,23 +73,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
-	//rotate the bitmap to portrait
-	public static Bitmap RotateBitmap(Bitmap source, float angle)
-	{
-	      Matrix matrix = new Matrix();
-	      matrix.postRotate(angle);
-	      return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
-	}
 	
-	//the front camera displays the mirror image, we should flip it to its original
-	Bitmap flip(Bitmap d)
-	{
-	    Matrix m = new Matrix();
-	    m.preScale(-1, 1);
-	    Bitmap src = d;
-	    Bitmap dst = Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), m, false);
-	    dst.setDensity(DisplayMetrics.DENSITY_DEFAULT);
-	    return dst;
-	}
+	
 	
 }
