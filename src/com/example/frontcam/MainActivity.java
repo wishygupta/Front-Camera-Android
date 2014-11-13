@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 	ImageView iv;
+	//to call our own custom cam
 	private final static int CAMERA_PIC_REQUEST1 = 0;
 	Context con;
 	@Override
@@ -72,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
+	//rotate the bitmap to portrait
 	public static Bitmap RotateBitmap(Bitmap source, float angle)
 	{
 	      Matrix matrix = new Matrix();
@@ -79,6 +81,7 @@ public class MainActivity extends ActionBarActivity {
 	      return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
 	}
 	
+	//the front camera displays the mirror image, we should flip it to its original
 	Bitmap flip(Bitmap d)
 	{
 	    Matrix m = new Matrix();

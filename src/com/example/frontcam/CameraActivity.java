@@ -165,6 +165,33 @@ public class CameraActivity extends ActionBarActivity {
 		releaseCamera(); // release the camera immediately on pause event
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		if(mCamera==null)
+		{
+			setContentView(R.layout.activity_camera);
+			captureButton = (Button) findViewById(R.id.button_capture);
+			FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+
+			// Create an instance of Camera
+			con = getApplicationContext();
+			try {
+				mCamera = getCameraInstance();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			// Create our Preview view and set it as the content of our activity.
+			mPreview = new CameraPreview(this, mCamera);
+
+			preview.addView(mPreview);
+		}
+	}
+	
 	private void releaseCamera() {
 		if (mCamera != null) {
 			mCamera.release(); // release the camera for other applications

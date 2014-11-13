@@ -246,11 +246,10 @@ int id action_context_bar 0x7f09001d
 int id action_menu_divider 0x7f090002
 int id action_menu_presenter 0x7f090003
 int id action_mode_close_button 0x7f090024
-int id action_settings 0x7f090041
+int id action_settings 0x7f09003f
 int id activity_chooser_view_content 0x7f090025
 int id always 0x7f09000f
 int id beginning 0x7f090016
-int id button1 0x7f090040
 int id button_capture 0x7f09003d
 int id camera_preview 0x7f09003c
 int id checkbox 0x7f09002d
@@ -268,7 +267,7 @@ int id homeAsUp 0x7f09000a
 int id icon 0x7f09002a
 int id ifRoom 0x7f090011
 int id image 0x7f090027
-int id imageView1 0x7f09003f
+int id imageView1 0x7f09003e
 int id listMode 0x7f090006
 int id list_item 0x7f090029
 int id middle 0x7f090018
@@ -295,7 +294,6 @@ int id showTitle 0x7f09000d
 int id split_action_bar 0x7f09001e
 int id submit_area 0x7f090039
 int id tabMode 0x7f090008
-int id textView1 0x7f09003e
 int id title 0x7f09002b
 int id top_action_bar 0x7f090020
 int id up 0x7f090021
